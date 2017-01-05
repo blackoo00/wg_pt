@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ID=edge, chorome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="{wghd::RES}/scanner/css/main.css">
+	<title>{wghd:$wxuser.wxname}</title>
+</head>
+<script type="text/javascript">
+function onBridgeReady(){
+ WeixinJSBridge.call('showOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+window.shareData = {  
+	"moduleName":"Distribution",
+	"moduleID": 0,
+	"lid": 0,
+	"mid": "{wghd:$my.id}",
+	"imgUrl": "{wghd:$res.pic}", 
+	"sendFriendLink": "{wghd::C('site_url')}{wghd::U('Distribution/myScanner',array('token'=>$_GET['token'],'mid'=>$_GET['mid']))}",
+	"tTitle": "{wghd:$res.title}",
+	"tContent": "{wghd:$res.text}",
+};
+</script>
+{wghd:$shareScript}
+</head>
+<body style="background:#1c8d7c;" max-width="640px">
+	<div class="index_left">
+		<div class="index_left_title"><img src="{wghd::RES}/scanner/images/index_03.png"></div>
+		<div class="index_left_bg">
+		    <div class="index_left_img"><img src="{wghd::RES}/scanner/images/index_09.png"></div>
+		    <div class="index_left_txt">梦想飞扬 与您同行</div>
+		</div>
+	</div>
+	<div class="index_right">
+		<div class="index_right_name">{wghd:$from_member['nickname']|msubstr=0,8}</div>
+		<div class="index_right_img"><img src="{wghd:$from_member['headimgurl']}"></div>
+	</div>
+  <div class="index_all">
+	<div class="index_people"><img src="{wghd::RES}/scanner/images/index_10.png"></div>
+	<div class="index_erweima"><img src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={wghd:$code_url}"></div>
+  </div>
+
+  <div class="index_details">[长按图片识别二维码添加]</div>
+</body>
+</html>

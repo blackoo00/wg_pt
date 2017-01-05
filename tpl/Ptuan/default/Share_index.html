@@ -1,0 +1,117 @@
+<include file ="Public:head"/>
+
+<body>
+<div id="loading">
+	<include file="Share:loading"/>
+</div>
+<div class="container" id="container" style="display:none;">
+	<!-- 导航栏 -->
+    <div class="main_menu">
+        <ul>
+            <li><a href="{wghd::U('Share/index')}" <empty name="cat_id">class="cur"</empty>>首页</a></li>
+
+			<volist name="cats" id="vo">
+            <li><a <eq name="vo.cat_id" value="$show_cat">class="cur"</eq> href="{wghd::U('Share/index',array('cat_id'=>$vo['cat_id']))}">{wghd:$vo.cat_name}</a></li>
+			</volist>
+
+        </ul>
+    </div>
+	<!-- 轮播图 -->
+ 	<section class="main-view" style=" margin-top:40px;">
+
+ 		<!-- S 轮播 --> 	
+
+ 		<div class="swiper-container">
+ 			<div class="swiper-wrapper">
+ 				<volist name="banner" id="item">
+     				<div class="swiper-slide" style="padding:0 10px;">
+     					<a href="{wghd:$item.url}">
+     						<img src="{wghd:$item.picurl}" width="100%">
+     					</a>
+     				</div>
+               </volist>
+ 			</div>
+ 			<div class="swiper-pagination"></div>
+ 		</div>
+ 	</section>
+	<!-- goodslist -->
+    <section class="main-view">
+        <div id="tuan" class="tuan" style="padding-top: 10px; display: block;">
+            <div ms-repeat-item="goods_list" id="goods-wrap">
+
+			<volist name="good" id="vo">
+                <div class="tuan_g" >
+                    <a href="{wghd::U('Share/goods',array('goodid'=>
+                        $vo['goods_id']))}">
+                        <div class="tuan_g_img">
+                            <img src="{wghd:$vo.goods_img}">                
+
+                            <lt name="vo['goods_number']" value="1">
+                                <span class="sell_f"></span>
+                            </lt>
+
+                            <span class="tuan_mark tuan_mark2">
+                                <span>{wghd:$vo.team_num}人团</span>
+                            </span>
+                        </div>
+
+                        <div class="tuan_g_info">
+                            <p class="tuan_g_name">{wghd:$vo.goods_name}</p>
+                            <p class="tuan_g_cx">{wghd:$vo.goods_brief}</p>
+                        </div>
+
+                        <div class="tuan_g_core">
+                            <div class="tuan_g_price">
+                                <span>{wghd:$vo.team_num}人团</span> <b>¥{wghd:$vo.team_price}</b>
+                            </div>
+                            <div class="tuan_g_btn">去开团</div>
+                        </div>
+
+                        <div class="tuan_g_mprice">
+                            市场价： <del>¥{wghd:$vo.market_price}</del>
+                        </div>
+                    </a>
+                </div>
+            </volist>
+            </div>
+        </div>
+    </section>
+ 
+</div>
+<include file ="Public:footer"/>
+<script>
+    $(window).bind("scroll",function() {
+        if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+            var count = $('.tuan_g').length;
+            var cat_id = "{wghd:$cat_id}";
+            $.ajax({
+                url:"{wghd::U('Share/scrollLoadGoods')}",
+                data:{count:count,cat_id:cat_id},
+                dataType:'json',
+                success:function(data){
+                        console.log(data);
+                    if(data.status == 1){
+                        $('#goods-wrap').append(data.data);
+                    }
+                }
+            });
+        }
+    });
+</script>
+<script>
+	window.onload=function(){
+		$('#loading').remove();
+		document.getElementById('container').style.display='';
+		
+			var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        spaceBetween: 30,
+	        centeredSlides: true,
+	        autoplay: 2500,
+	        autoplayDisableOnInteraction: false
+	    });
+	}
+</script>
+</body>
+</html>

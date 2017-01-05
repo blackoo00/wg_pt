@@ -1,0 +1,218 @@
+<include file="Public:head"/>
+
+
+<body>
+<div id="loading"></div>
+<div class="container" id="container" style="display:none;">
+	<!-- 导航栏 -->
+	<div class="nav_fixed">
+		<a href="{wghd::U('Share/rank',array('act'=>'is_hot'))}" class="fixed_nav_item <eq name='Think.get.act' value='is_hot'>nav_cur</eq> "><span class="nav_txt">热榜</span></a>
+        <a href="{wghd::U('Share/rank',array('act'=>'is_new'))}" class="fixed_nav_item <eq name='Think.get.act' value='is_new'>nav_cur</eq> "><span class="nav_txt nav_payment">新榜</span></a>
+        <a href="{wghd::U('Share/rank',array('act'=>'is_best'))}" class="fixed_nav_item <eq name='Think.get.act' value='is_best'>nav_cur</eq>"><span class="nav_txt nav_receiving">精品</span></a>
+    </div>
+
+	<!-- goodslist -->
+    <section class="main-view" style = "padding-top:40px;">
+        <div id="tuan" class="tuan" style="padding-top: 10px; display: block;">
+            <div ms-repeat-item="goods_list" id="goods-wrap">
+
+			<volist name="good" id="vo">
+                <div class="tuan_g" >
+                    <a href="{wghd::U('Share/goods',array('goodid'=>$vo['goods_id']))}">
+                        <div class="tuan_g_img">
+                            <img src="{wghd:$vo.goods_img}">
+
+                            <lt name="vo['goods_number']" value="1">
+                            <span class="sell_f"></span>
+							</lt>
+
+                            <span class="tuan_mark tuan_mark2">	
+                           
+	
+                            <!-- <b>
+								<php>
+									echo round(($vo['team_price']/$vo['market_price']*100),1);
+								</php>
+                            折</b> -->
+                            <span>{wghd:$vo.team_num}人团</span>
+                            </span>
+                        </div>
+
+                        <div class="tuan_g_info">
+                            <p class="tuan_g_name">{wghd:$vo.goods_name}</p>
+                            <p class="tuan_g_cx">{wghd:$vo.goods_brief}</p>
+                        </div>
+
+                        <div class="tuan_g_core">
+                            <div class="tuan_g_price">
+                                <span>{wghd:$vo.team_num}人团</span>
+                                <b>¥2.50</b>
+                            </div>
+                            <div class="tuan_g_btn">去开团</div>
+                        </div>
+
+                        <div class="tuan_g_mprice">市场价：
+                            <del>¥{wghd:$vo.market_price}</del>
+                        </div>
+                    </a>
+                </div>
+            </volist>
+            </div>
+        </div>
+    </section>
+ 
+</div>
+
+<include file ="Public:footer"/>
+
+<script>
+	$(window).bind("scroll",function() {
+	    if ($(document).scrollTop() + $(window).height() >= $(document).height()) {
+	        var count = $('.tuan_g').length;
+	        var act = "{wghd:$act}";
+	        $.ajax({
+	            url:"{wghd::U('Share/scrollLoadGoods')}",
+	            data:{count:count,act:act},
+	            dataType:'json',
+	            success:function(data){
+	                    console.log(data);
+	                if(data.status == 1){
+	                    $('#goods-wrap').append(data.data);
+	                }
+	            }
+	        });
+	    }
+	});
+</script>
+
+<script>
+	window.onload=function(){
+		document.getElementById('loading').style.display='none';
+		document.getElementById('container').style.display='';
+		
+			var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        spaceBetween: 30,
+	        centeredSlides: true,
+	        autoplay: 2500,
+	        autoplayDisableOnInteraction: false
+	    });
+	}
+</script>
+<!--script type="text/javascript">
+	$(function() {
+		var swiper = new Swiper('.swiper-container', {
+	        pagination: '.swiper-pagination',
+	        paginationClickable: true,
+	        spaceBetween: 30,
+	        centeredSlides: true,
+	        autoplay: 2500,
+	        autoplayDisableOnInteraction: false
+	    });
+	});
+</script-->
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script language="javascript" type="text/javascript">
+
+	wx.config({
+	    debug: false,//这里是开启测试，如果设置为true，则打开每个步骤，都会有提示，是否成功或者失败
+	    appId: '1111',
+	    timestamp: '1478230476',//这个一定要与上面的php代码里的一样。
+	    nonceStr: '1478230476',//这个一定要与上面的php代码里的一样。
+	    signature: '4de6810ac0a924c5a23ee5f7e48cb5de42512b82',
+	    jsApiList: [
+	      // 所有要调用的 API 都要加到这个列表中
+	        'onMenuShareTimeline',
+	        'onMenuShareAppMessage',
+	        'onMenuShareQQ',
+	        'onMenuShareWeibo'
+	        
+	    ]
+	});
+
+	var title="这个商品帅呆了，大家一起来拼单吧，赶紧行动吧！GOGOGOGO！";
+	var link= "http://localhost/pttest/index.php";
+	var imgUrl="http://wx.qlogo.cn/mmopen/jjEmt1GUK02ZHPtkXvFSBPtBNZDdJNhkrPZRuPysu2aSmxa2YctJHT3FMITDP8Nqjkh5oyLgnCyoaXcoZ1SOiczqhuBGS16yL/0";
+	var desc= "这个商品帅呆了，大家一起来拼单吧，赶紧行动吧！GOGOGOG";
+	wx.ready(function () {
+	    wx.onMenuShareTimeline({//朋友圈
+	        title: title, // 分享标题
+	        link: link, // 分享链接
+	        imgUrl: imgUrl, // 分享图标
+	        success: function () { 
+	            // 用户确认分享后执行的回调函数
+	        	statis(2,1);
+	        },
+	        cancel: function () { 
+	            // 用户取消分享后执行的回调函数
+	        	statis(2,2);
+	        }
+	    });
+	    wx.onMenuShareAppMessage({//好友
+	        title: title, // 分享标题
+	        desc: desc, // 
+	        link: link, // 分享链接
+	        imgUrl: imgUrl, // 分享图标
+	        type: '', // 分享类型,music、video或link，不填默认为link
+	        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+	        success: function () { 
+	        	// 用户确认分享后执行的回调函数
+	            statis(1,1);    
+	        },
+	        cancel: function () { 
+	            // 用户取消分享后执行的回调函数
+	        	statis(1,2);
+	        }
+	    });
+	  
+	    wx.onMenuShareQQ({
+	        title: title, // 分享标题
+	        desc: desc, // 分享描述
+	        link: link, // 分享链接
+	        imgUrl: imgUrl, // 分享图标
+	        success: function () { 
+	           // 用户确认分享后执行的回调函数
+	        	statis(4,1);
+	        },
+	        cancel: function () { 
+	           // 用户取消分享后执行的回调函数
+	        	statis(4,2);
+	        }
+	    });
+	    wx.onMenuShareWeibo({
+	        title: title, // 分享标题
+	        desc: desc, // 分享描述
+	        link: link, // 分享链接
+	        imgUrl: imgUrl, // 分享图标
+	        success: function () { 
+	           // 用户确认分享后执行的回调函数
+	        	statis(3,1);
+	        },
+	        cancel: function () { 
+	            // 用户取消分享后执行的回调函数
+	        	statis(3,2);
+	        }
+	    });
+	    
+	    
+	});
+	
+	function statis(share_type,share_status){
+		$.ajax({
+            type:"post",//请求类型
+            url:"share.php",//服务器页面地址
+            data:"act=link&share_status="+share_status+"&share_type="+share_type+"&link_url=http%3A%2F%2Flocalhost%2Fpttest%2Findex.php",
+            dataType:"json",//服务器返回结果类型(可有可无)
+            error:function(){//错误处理函数(可有可无)
+                //alert("ajax出错啦");
+            },
+            success:function(data){
+                
+            }
+        });
+	}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<include file ="Public:head"/>
+<body>
+<div class="container">
+    <section class="main-view">
+        <div class="my">
+            <div class="my_head">
+                <div class="my_head_pic">
+                    <img class="my_head_img" width="130" height="130" src="{wghd:$user.headimgurl}">
+                </div>
+                <div class="my_head_info">
+                    <h4 class="my_head_name ">{wghd:$user.user_name}</h4>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="nav">
+                <ul class="nav_list">
+                    <li class="nav_item nav_order">
+                        <a href="{wghd::U('Share/orderList',array('uid'=>$user['user_id']))}">
+                            <div class="nav_item_hd">我的订单</div>
+                        </a>
+                        <div class="nav_item_bd">
+                            <a href="{wghd::U('Share/orderList')}"><span class="nav_item_txt">全部</span></a>
+                            <a href="{wghd::U('Share/orderList',array('type'=>'paid'))}">
+                                <span class="nav_item_txt">待付款<i class="{wghd::U('Share/ordList',array('uid'=>$user['user_id']))}" id="need_pay_count"  style="display:none">0</i></span>
+                            </a>
+                            <a href="{wghd::U('Share/orderList',array('type'=>'sent'))}">
+                                <span class="nav_item_txt">待收货<i class="nav_item_num" id="need_recv_count" style="display:none">0</i></span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav_item nav_cheap">
+                        <div class="nav_item_hd"><a href="{wghd::U('Share/teamList',array('uid'=>$user['user_id']))}"> 我的拼团 </a></div>
+                    </li>
+                    <li class="nav_item nav_cart">
+                        <div class="nav_item_hd"><a href="javascript:;" onclick="addJump('{wghd::U('Share/addressList')}')">我的地址 </a></div>
+                    </li>
+                        <li class="nav_item nav_cart">
+                        <div class="nav_item_hd_coupons"><a class="coupons_a" href="{wghd::U('Share/getMoney')}">我的余额 <item style="float: right; margin-right: 10px;">{wghd:$user[user_money]}</item></a></div>
+                        </li>
+                    <!-- <li class="nav_item nav_cart">
+                        <div class="nav_item_hd_coupons_sale"><a class="coupons_a" href="article.php?id=38">售后服务 </a></div>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+            <!-- 去关注 -->
+            <!-- <eq name="$user.is_subscribe" value="0">
+                <div class="guanzhu" id="guanzhu">
+                关注我们有更多惊喜，
+                <a href="http://mp.weixin.qq.com/s?__biz=MzA5NTQwNTk4MQ==&mid=400757678&idx=1&sn=fda95ee24c46e45adc72a09483266f90">立即去关注</a>
+                <span onclick="document.getElementById('guanzhu').style.display='none';"><i class="fa fa-remove"></i></span>
+                </div>                                
+            </eq> -->
+    </section>
+    <script>
+        function addJump(url){
+            $.post("{wghd::U('Share/delShopping')}",function(){
+                location.href = url;
+            })
+        }
+    </script>
+</div>
+
+<include file ="Public:footer"/>
+

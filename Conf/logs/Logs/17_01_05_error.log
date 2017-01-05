@@ -1,0 +1,24 @@
+[ 2017-01-05T09:08:45+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Share
+[ 2017-01-05T09:49:44+08:00 ] ERR: (ThinkException) La table 'wg_pt.pigcms_order_info' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_order_info`
+[ 2017-01-05T09:50:38+08:00 ] ERR: (ThinkException) La table 'wg_pt.pigcms_order_info' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_order_info`
+[ 2017-01-05T09:54:57+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Order
+[ 2017-01-05T09:55:24+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Member
+[ 2017-01-05T09:55:28+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Member
+[ 2017-01-05T09:55:29+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Order
+[ 2017-01-05T09:55:38+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/User/default/PtOrder_team.html]
+[ 2017-01-05T09:57:28+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Order
+[ 2017-01-05T09:58:15+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Order
+[ 2017-01-05T09:58:18+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Order
+[ 2017-01-05T09:58:45+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:deleteOrder
+[ 2017-01-05T10:00:33+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Order
+[ 2017-01-05T10:01:20+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Order
+[ 2017-01-05T10:02:06+08:00 ] ERR: (ThinkException) Champ 'address' inconnu dans where clause
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `pigcms_pt_users` WHERE ( (`user_name` LIKE '%123%') OR (`user_id` LIKE '%123%') OR (`address` LIKE '%123%') ) LIMIT 1  
+[ 2017-01-05T10:02:10+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Member
+[ 2017-01-05T10:02:37+08:00 ] ERR: (ThinkException) Champ 'address' inconnu dans where clause
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM `pigcms_pt_users` WHERE ( (`user_name` LIKE '%123%') OR (`user_id` LIKE '%123%') OR (`address` LIKE '%123%') ) LIMIT 1  
+[ 2017-01-05T11:25:04+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [SiVYWa0864ge20]openid=
+[ 2017-01-05T11:26:54+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Ptuan
+[ 2017-01-05T11:27:09+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Ptuan

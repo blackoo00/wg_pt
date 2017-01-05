@@ -1,0 +1,13 @@
+[ 2016-11-25T17:01:02+08:00 ] ERR: 发生错误：错误代码41001,微信返回错误信息：access_token missing hint: [GBOCqa0615vr43!]openid=
+[ 2016-11-25T17:06:07+08:00 ] ERR: 发生错误：错误代码41001,微信返回错误信息：access_token missing hint: [LTOzaa0920vr47!]openid=
+[ 2016-11-25T17:06:25+08:00 ] ERR: 发生错误：错误代码41001,微信返回错误信息：access_token missing hint: [dH.680937vr32!]openid=
+[ 2016-11-25T17:12:19+08:00 ] ERR: 发生错误：错误代码41001,微信返回错误信息：access_token missing hint: [5AcE2a0291vr43!]openid=
+[ 2016-11-25T17:12:20+08:00 ] ERR: 发生错误：错误代码41001,微信返回错误信息：access_token missing hint: [bz.0292vr45!]openid=
+[ 2016-11-25T17:12:41+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [593Pta0313zbg7]openid=
+[ 2016-11-25T17:13:33+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [_CX5Qa0365ge11]openid=
+[ 2016-11-25T17:20:06+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [x1Y1ia0758ge13]openid=
+[ 2016-11-25T17:20:34+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [KvBhkA0786ge11]openid=
+[ 2016-11-25T17:20:55+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [BiHtsa0807zbg7]openid=
+[ 2016-11-25T17:21:21+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [_spCpA0833ge12]openid=
+[ 2016-11-25T17:21:33+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [ceUK60845ge14]openid=
+[ 2016-11-25T17:22:19+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [GB546a0891ge10]openid=

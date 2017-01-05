@@ -1,0 +1,224 @@
+<include file ="Public:head"/>
+<script type="text/javascript">
+
+		//调用微信JS api 支付
+
+	  function jsApiCall(code,returnrul,is_check,team_sign){
+            
+            if(is_check==1){
+                
+                $.ajax({
+                    type:"post",//请求类型
+                    url:"team_info.php",//服务器页面地址
+                    data:"team_sign="+team_sign,
+                    dataType:"json",
+                    error:function(){
+                        //alert("ajax出错啦");
+                    },
+                    success:function(data){
+                  
+                        if(data.error==0){
+                        
+                            WeixinJSBridge.invoke('getBrandWCPayRequest',code,function(res){
+
+            					WeixinJSBridge.log(res.err_msg);
+            					
+            					if(res.err_msg.indexOf('ok')>0){
+            
+            						window.location.href=returnrul;
+            
+            					}
+            				});
+	                    }else{
+	                       window.location=data.url;
+	                    }
+                    }
+                });
+                
+	        }else{
+	        
+                WeixinJSBridge.invoke('getBrandWCPayRequest',code,function(res){
+
+					WeixinJSBridge.log(res.err_msg);
+
+				//	alert(res.err_code+'调试信息：'+res.err_desc+res.err_msg);
+
+					if(res.err_msg.indexOf('ok')>0){
+
+						window.location.href=returnrul;
+
+					}
+
+				});
+	        }
+			
+
+		}
+ 
+		function callpay(code,returnrul,is_check,team_sign)
+
+		{
+
+			 if (typeof WeixinJSBridge == "undefined"){
+
+			    if( document.addEventListener ){
+
+			        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+
+			    }else if (document.attachEvent){
+
+			        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+
+			        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+
+			    }
+
+			}else{
+							
+			    jsApiCall(code,returnrul,is_check,team_sign);
+			} 
+		}
+		
+	</script>
+	
+</head>
+<body>
+<div class="container">
+    <script type="text/javascript" src="{wghd::RES}/ptuan/js/utils.js"></script>    
+    <script type="text/javascript" src="{wghd::RES}/ptuan/js/region.js"></script>    
+    <script type="text/javascript">
+      region.isAdmin = false;
+            var consignee_not_null = "收货人姓名不能为空！";
+            var country_not_null = "请您选择收货人所在国家！";
+            var province_not_null = "请您选择收货人所在省份！";
+            var city_not_null = "请您选择收货人所在城市！";
+            var district_not_null = "请您选择收货人所在区域！";
+            var invalid_email = "您输入的邮件地址不是一个合法的邮件地址。";
+            var address_not_null = "收货人的详细地址不能为空！";
+            var tele_not_null = "电话不能为空！";
+            var shipping_not_null = "请您选择配送方式！";
+            var payment_not_null = "请您选择支付方式！";
+            var goodsattr_style = "1";
+            var tele_invaild = "电话号码不有效的号码";
+            var zip_not_num = "邮政编码只能填写数字";
+            var mobile_invaild = "手机号码不是合法号码";
+            
+      onload = function() {
+        if (!document.all)
+        {
+          document.forms['theForm'].reset();
+        }
+      }
+      
+    </script>
+    
+    <div class="wx_bar">
+        <div class="wx_bar_back">
+            <a id="listPageback" href="javascript:void(0);"></a>
+        </div>
+        <div class="wx_bar_act">
+            <a href="javascript:void(0);" class="wx_bar_new" style="display: none;" id="_new"></a>
+        </div>
+    </div>
+    <div class="wx_wrap">
+        <div class="address_list" id="addressList">
+            <div class="address">
+                <volist name="adres" id="vo">               
+                <ul>
+                    <li><span>{wghd:$vo.consignee}</span></li>
+                    <li><strong>{wghd:$vo.address}</strong>{wghd:$vo.mobile}</li>
+                    <li><a class="edit" href="{wghd::U('Share/adresEdit',array('adresid' => $vo['address_id']))}" >编辑</a></li>
+                </ul>
+                </volist>
+            </div>
+
+            <div class="address_list_link"> 
+                <a href="user.php?act=edit_consignee" class="item item_new">新增收货地址</a>
+            </div>
+            <div class="margin_footer"></div>
+        </div>
+    </div>
+    
+
+
+
+
+        
+</div>
+<include file="Public:footer"/>
+</body>
+<script type="text/javascript">
+var msg_title_empty = "留言标题为空";
+var msg_content_empty = "留言内容为空";
+var msg_title_limit = "留言标题不能超过200个字";
+function toggle(thisObj){
+	if(thisObj.className.indexOf('slideleft')!==-1){
+		thisObj.className='coup_one slide_width ';
+	}else{
+		thisObj.className="coup_one slide_width slideleft";
+	}
+}
+</script>
+  
+<script language="javascript">
+	function cancel_invoice(){
+		document.body.style.overflow = "";
+		document.getElementById('invoice').style.display='none';
+		document.getElementById('dealliststatus1').style.display='';
+		document.getElementById("dealliststatus1").style.backgroundColor="";
+		document.getElementById("dealliststatus1").style.opacity = '';
+	}
+    function get_invoice(expressid,expressno){	
+    	document.getElementById("invoice").style.display="";
+    	document.getElementById("invoice").innerHTML="<center>正在查询物流信息，请稍后...</center>";
+    	if(document.getElementById("dealliststatus1")){
+    		//document.getElementById("dealliststatus1").style.display="none";
+    		
+    		document.body.style.overflow = "hidden";
+    		document.getElementById("dealliststatus1").style.backgroundColor="#EEEEEE";
+    		document.getElementById("dealliststatus1").style.opacity = 50/100;
+    		/**/
+    	}
+    	
+    	/*
+    	var expressid = document.getElementById("shipping_name").innerHTML;
+    	var expressno = document.getElementById("invoice_no").innerHTML;
+    	
+    	var expressid="";
+    	var expressno=""; 
+    	*/ 
+
+    	Ajax.call('/plugins/juhe/kuaidi.php?com='+ expressid+'&nu=' + expressno,'showtest=showtest', 
+    			get_invoice_reponse, 'GET', 'JSON');
+    }
+	function get_invoice_reponse(result){ 
+		/*
+		  {"message":"ok","status":"1","state":"3","data":
+            [{"time":"2012-07-07 13:35:14","context":"客户已签收"},
+             {"time":"2012-07-07 09:10:10","context":"离开 [北京石景山营业厅] 派送中，递送员[温]，电话[]"},
+             {"time":"2012-07-06 19:46:38","context":"到达 [北京石景山营业厅]"},
+             {"time":"2012-07-06 15:22:32","context":"离开 [北京石景山营业厅] 派送中，递送员[温]，电话[]"},
+             {"time":"2012-07-06 15:05:00","context":"到达 [北京石景山营业厅]"},
+             {"time":"2012-07-06 13:37:52","context":"离开 [北京_同城中转站] 发往 [北京石景山营业厅]"},
+             {"time":"2012-07-06 12:54:41","context":"到达 [北京_同城中转站]"},
+             {"time":"2012-07-06 11:11:03","context":"离开 [北京运转中心驻站班组] 发往 [北京_同城中转站]"},
+             {"time":"2012-07-06 10:43:21","context":"到达 [北京运转中心驻站班组]"},
+             {"time":"2012-07-05 21:18:53","context":"离开 [福建_厦门支公司] 发往 [北京运转中心_航空]"},
+             {"time":"2012-07-05 20:07:27","context":"已取件，到达 [福建_厦门支公司]"}
+            ]} 
+		*/
+/*
+		if((result.status==0||result.status==3||result.status==5)&&result.message=='ok'){
+			var str="";
+			$.each(result.data,function(i,e){
+				str+=e.context+"	".e.time;
+			})
+			document.getElementById("retData").innerHTML=str;
+		}else{
+			document.getElementById("retData").innerHTML=result.message;
+		}*/
+		
+		document.getElementById("invoice").innerHTML=result;
+	}
+</script>
+</html>

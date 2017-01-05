@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="target-densitydpi=device-dpi, width=640,user-scalable=0" name="viewport">
+<title>用户中心-我的资料</title>
+<link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
+<link href="{wghd::RES}/distri/css/tx.css" rel="stylesheet" type="text/css" />
+<script src="{wghd::RES}/distri/js/jquery-1.8.3.min.js"></script>
+<style>
+.deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:23px 34px;border:solid #d6d482 1px;background:#f5f4c5;font-size:1.6em;color:#8f772f;line-height:30px;border-radius:3px;}
+</style>
+</head>
+
+<body>
+	<div class="container">
+      <div class="text">
+        	<div class="cont">
+        		<div class="cont_left">真实姓名:</div><!--cont_left-->
+                <div class="cont_right">
+                  <input  type="text" name="name" value="{wghd:$my.name}" id="name" class="bd" placeholder="请输入真实姓名"/>
+                </div><!--cont_right-->
+       	    </div><!--cont-->
+            
+            <div class="cont">
+        		<div class="cont_left">联系电话:</div><!--cont_left-->
+                <div class="cont_right">
+                  <input type="text" name="tele" id="tele" value="{wghd:$my.tele}" class="bd" placeholder="请输入联系电话"/>
+                </div><!--cont_right-->
+       	    </div><!--cont-->
+
+			<div class="cont">
+        		<div class="cont_left">QQ号码:</div><!--cont_left-->
+                <div class="cont_right">
+                  <input type="text" name="email" id="email" value="{wghd:$my.email}" class="bd" placeholder="请输入QQ号码"/>
+                </div><!--cont_right-->
+       	    </div><!--cont-->
+        </div><!--text-->
+        
+        <div class="clear"></div>
+        <input type="button" name="button" id="pxbtn" value="提交" class="tj"/>
+
+	<include file="Public:footer"/>
+    
+    </div><!--container-->
+<script>
+                    $(document).ready(function() {
+
+					 $("#pxbtn").bind("click",
+                        function() {
+
+                            var self = $(this);
+							var wecha_id = "{wghd:$wecha_id}";
+                            var name = $('#name').val();
+                            //var sex=$("input[name='sex']:checked").val();
+                            var tele = $('#tele').val();
+                            var email = $('#email').val();
+
+                            if (wecha_id == '') {
+
+                                showTip("异常的访问链接");
+
+                                return;
+
+                            }
+							if(name==''){
+								showTip("姓名不能为空");
+
+                                return;
+							}
+							/*if(sex==''){
+								showTip("请选择性别");
+
+                                return;
+							}*/
+							if(tele==''){
+								showTip("手机号码不能为空");
+
+                                return;
+							}
+							if(email==''){
+								showTip("QQ号码不能为空");
+
+                                return;
+							}
+							var submitData = {
+								name: name,
+								//sex: sex,
+								tele: tele,
+								email: email
+							};
+
+							$.post("{wghd::U('Distribution/myInfo',array('token'=>$token,'wecha_id'=>$wecha_id))}", submitData,
+							function(bakcdata) {
+								var obj = eval('(' + bakcdata + ')');
+
+								if (obj.success == 1) {
+
+									showTip(obj.info);
+									setTimeout("window.location.href='{wghd::U('Distribution/myInfo',array('token'=>$token,'wecha_id'=>$wecha_id))}'", 2000);
+
+									return
+
+								} else {
+
+									showTip(obj.info);
+
+									return
+
+								}
+
+							});
+
+                        });
+                    });
+	function showTip(tipTxt) {
+	  var div = document.createElement('div');
+	  div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+	  var tipNode = div.firstChild;
+	  $(".container").after(tipNode);
+	  setTimeout(function () {
+		$(tipNode).remove();
+	  }, 1500);
+	}
+</script>
+</body>
+</html>

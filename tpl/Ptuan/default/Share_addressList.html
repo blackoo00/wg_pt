@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" /><meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta name="format-detection" content="telephone=no"/>
+	<title>地址列表</title>
+	<script src="{wghd::RES}/ptuan/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="{wghd::RES}/ptuan/js/notification.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="{wghd::RES}/address/iconfont.css">
+	<link rel="stylesheet" href="{wghd::RES}/address/style.css">
+<link href="{wghd::RES}/ptuan/css/haohaios.css" rel="stylesheet" />
+<link href="{wghd::RES}/ptuan/css/font-awesome.min.css" rel="stylesheet" />
+
+</head>
+<body id="scnhtm5">
+	<volist id="list" name="list">
+		<div class="address">
+		     <div class="address_all">
+		         <div class="address_name">{wghd:$list.consignee}</div>
+		         <div class="address_phone">{wghd:$list.mobile}</div>
+		         <div class="clear"></div>
+		         <div class="address_dizhi">{wghd:$list.address}</div>
+		     </div>
+		     <div class="line"></div>
+		     <div class="xuanzhong iconfont unchoose <eq name="list['address_id']" value="$user['address_id']">choose</eq>" data-id="{wghd:$list.address_id}"></div><div style="float: left;line-height: 31px;">设为默认地址</div>
+		     <div class="wrap">
+			        <div class="box-163css iconfont">
+			        	  <span class="update iconfont" data-id="{wghd:$list.address_id}" onclick="del(this)">&#xe601;</span>
+		 	              <!-- <input type="button" value="{wghd:$list.id}" onclick="del(this)"> -->
+		            </div>
+		    </div>
+		    <a href="{wghd::U('Share/editAddress',array('id'=>$list['address_id']))}">
+		     	<div class="update iconfont">&#xe600;</div>
+		    </a>
+		</div>
+	</volist>
+	<notempty name="shopping">
+		<a id="submit" style="display: block;background-color: #56B72B;" href="{wghd:$shopping}">继续支付</a>
+	</notempty>
+	<a href="{wghd::U('Share/addAddress')}">
+		<div id="submit">新增地址</div>
+	</a>
+	<empty name="Think.get.type">
+	<include file="Public:footer"/>
+	</empty>
+<script>
+	var del_id;
+	function del(obj){
+		del_id=$(obj).data("id");
+		confirm =floatNotify.confirm("确实要删除该地址吗？", "",
+		    function(t, n) {
+		        if(n==true){
+		            location.href="{wghd::U('Share/delAddress',array('id'=>'"+del_id+"'))}";
+		        }
+		    	this.hide();
+		    }),
+		    confirm.show();
+		}
+	(function($){
+		var address=$(".address");
+		address.on('click',".xuanzhong,.address_all",function(){
+			var obj=$(this).parents(".address").find(".xuanzhong");
+			var id=obj.data("id");
+			console.log(id);
+			$.ajax({
+				url:"{wghd::U('Share/chooseAdd')}",
+				data:{id:id},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					address.each(function(){
+						$(this).find(".xuanzhong").removeClass("choose");
+					})
+					obj.addClass("choose");
+				}
+			});
+		})
+	})(jQuery);
+</script>
+<script>
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Store",
+            "moduleID":"0",
+            "imgUrl": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}", 
+            "timeLineLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "sendFriendLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "weiboLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "tTitle": "{wghd:$metaTitle}",
+            "tContent": "{wghd:$metaTitle}"
+        };
+</script>
+{wghd:$shareScript}
+</body>
+</html>

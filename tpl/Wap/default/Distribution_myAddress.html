@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" /><meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta name="format-detection" content="telephone=no"/>
+	<title>地址列表</title>
+	<script src="{wghd::RES}/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="{wghd::RES}/address/js/showBo.js"></script>
+	<link rel="stylesheet" href="{wghd::RES}/address/css/iconfont.css">
+	<link rel="stylesheet" href="{wghd::RES}/address/css/address.css">
+	<link type="text/css" rel="stylesheet" href="{wghd::RES}/css/store/css/style_touch11.css">
+</head>
+<body>
+	<volist id="list" name="list">
+		<div class="address">
+		     <eq name="_GET['id']" value=""><a href="{wghd::U('Store/orderCart',array('token'=>$_GET['token'],'aid'=>$list['id']))}"><else/><a href="{wghd::U('Store/quickBuy',array('token'=>$_GET['token'],'id'=>$_GET['id'],'did'=>$_GET['did'],'count'=>$_GET['count'],'aid'=>$list['id']))}"></eq><div class="address_all">
+		         <div class="address_name">{wghd:$list.name}</div>
+		         <div class="address_phone">{wghd:$list.tele}</div>
+		         <div class="clear"></div>
+		         <div class="address_dizhi">{wghd:$list.province}{wghd:$list.city}{wghd:$list.county}{wghd:$list.address}</div>
+		     </div>
+			 </a>
+		     <div class="line"></div>
+		     <eq name="list['choose']" value='1'><div class="xuanzhong iconfont unchoose choose" data-id="{wghd:$list.id}"></div></eq>
+		     <div class="wrap">
+			        <div class="box-163css iconfont">
+			        	  <span class="update iconfont" data-id="{wghd:$list.id}" onclick="del(this)">&#xe601;</span>
+		 	              <!-- <input type="button" value="{wghd:$list.id}" onclick="del(this)"> -->
+		            </div>
+		    </div>
+		    <a href="{wghd::U('Distribution/editAddress',array('token'=>$_GET['token'],'id'=>$list['id'],'aid'=>$_GET['id'],'did'=>$_GET['did'],'count'=>$_GET['count']))}">
+		     	<div class="update iconfont">&#xe600;</div>
+		    </a>
+		</div>
+	</volist>
+	<notempty name="shopping">
+		<a id="submit" style="display: block;background-color: #56B72B;" href="{wghd:$shopping}">继续支付</a>
+	</notempty>
+	<a href="{wghd::U('Distribution/addAddress',array('token'=>$_GET['token'],'id'=>$_GET['id'],'did'=>$_GET['did'],'count'=>$_GET['count']))}">
+		<div id="submit">新增新地址</div>
+	</a>
+<script>
+	var del_id;
+	function del(obj){
+		del_id=$(obj).data("id");
+		Showbo.Msg.confirm('您确定删除这条记录吗？',delete_add);
+	}
+	function delete_add(obj){
+		if(obj=="yes"){
+			location.href="{wghd::U('Distribution/delAddress',array('token'=>$_GET['token'],'aid'=>$_GET['id'],'did'=>$_GET['did'],'count'=>$_GET['count'],'id'=>'"+del_id+"'))}";
+		}else{
+			return;
+		}
+	}
+</script>
+<script>
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Store",
+            "moduleID":"0",
+            "imgUrl": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}", 
+            "timeLineLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "sendFriendLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "weiboLink": "{wghd::C('site_url') .  U('Store/orderCart',array('token' => $_GET['token']))}",
+            "tTitle": "{wghd:$metaTitle}",
+            "tContent": "{wghd:$metaTitle}"
+        };
+</script>
+{wghd:$shareScript}
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="target-densitydpi=device-dpi, width=640,user-scalable=0" name="viewport">
+<title>用户中心-我的收藏</title>
+<link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
+<link href="{wghd::RES}/distri/css/fdlb.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="container">
+	<volist name="list" id="vo">
+	<neq name="vo.product" value="">
+    <a href="{wghd::U('Store/product',array('token'=>$token,'wecha_id'=>$wecha_id,'id'=>$vo['productid']))}">
+    <div class="fd">
+    	<div class="tx"><img src="{wghd:$vo.product.logourl}" width="115px;"></div><!--tx-->
+        <div class="left">
+        	<ul class="left_ul">
+            	<li>商品名称：{wghd:$vo.product.name|msubstr=0,6,'utf-8',true}</li>
+                <li>商品价格：{wghd:$vo.product.price}&nbsp;元</li>
+                <li>收藏时间：{wghd:$vo.addtime|date='Y-m-d',###}</li>
+            </ul>
+        </div><!--left-->
+        <div class="right"><img src="{wghd::RES}/distri/images/jt.png"></div><!--right-->
+    </div>
+    </a>
+	<else/>
+    <div class="fd" style="height:80px;">
+        <div class="left">
+        	<ul class="left_ul">
+            	<li>该收藏商品已下架</li>
+            </ul>
+        </div><!--left-->
+    </div>
+	</neq>
+    </volist>
+    	
+<include file="Public:footer"/>
+    
+    </div><!--container-->
+</body>
+</html>

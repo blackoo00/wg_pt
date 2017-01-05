@@ -1,0 +1,127 @@
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="{wghd::RES}/css/cymain.css" />  
+ <div class="content">
+<div class="cLineB">
+<h4 class="left">分类管理</h4>
+<div class="clr"></div>
+</div>
+<!--tab start-->
+<include file="Ptsys:tab"/>
+<!--tab end-->
+<div class="cLine">
+<div class="pageNavigator left"> 
+
+<form action="" method="post" class="searchbar">
+
+<a href="{wghd::U('Ptsys/goodsAdd',array('cat_id'=>$_GET['cat_id']))}" title="新增商品" class="btnGrayS vm bigbtn"><img src="{wghd::RES}/images/product/add.png" class="vm">新增商品</a>
+
+<input type="text" id="msgSearchInput" class="txt" placeholder="输入相关信息搜索" name="searchkey" value="{wghd:$Think.request.searchkey}">
+<input type="submit" value="搜索" class="btnGrayS" />
+</form>
+
+
+
+</div>
+<!-- <div class="pageNavigator right"> 
+<a href="{wghd::U('Store/setting', array('token' => $token))}" title="商城设置" class="btnGrayS vm bigbtn"><img src="{wghd::RES}/images/product/add.png" class="vm">商城设置</a>
+</div> -->
+<div class="clr"></div>
+</div>
+<div class="msgWrap">
+<form method="post" action="" id="info">
+<input name="delall" type="hidden" value="">
+<input name="wxid" type="hidden" value="">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+<thead>
+<tr>
+<!-- <th class="select">名称</th> -->
+<th width="200">商品名称</th>
+<!-- <th width="100">货号</th> -->
+<th width="100">价格</th>
+<th width="100">参团人数</th>
+<th width="100">团购价格</th>
+<th width="90">精品</th>
+<th width="90">新品</th>
+<th width="90">热销</th>
+<th width="90">上架</th>
+<th width="90">排序值</th>
+<th width="60">销量</th>
+<th width="60">库存</th>
+<th width="200" class="norightborder">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr></tr>
+<volist name="list" id="hostlist"> 
+<tr>
+<!-- <td><input type="checkbox" name="del_id[]" value="285" class="checkitem"></td> -->
+<td>{wghd:$hostlist.goods_name}</td>
+<!-- <td>{wghd:$hostlist.goods_sn}</td> -->
+<td>{wghd:$hostlist.shop_price}</td>
+<td>{wghd:$hostlist.team_num}</td>
+<td>{wghd:$hostlist.team_price}</td>
+
+<td>
+<if condition = "$hostlist.is_best eq 1">
+
+	<image src="{wghd::STATICS}/images/yes.gif"></image>
+	<else/>
+	<image src="{wghd::STATICS}/images/no.gif"></image>
+
+</if>
+</td>
+
+<td>
+<if condition = "$hostlist.is_new eq 1">
+	<image src="{wghd::STATICS}/images/yes.gif"></image>
+	<else/>
+	<image src="{wghd::STATICS}/images/no.gif"></image>
+</if>
+</td>
+
+<td>
+<if condition = "$hostlist.is_hot eq 1">
+
+	<image src="{wghd::STATICS}/images/yes.gif"></image>
+	<else/>
+	<image src="{wghd::STATICS}/images/no.gif"></image>
+
+</if>
+</td>
+
+<td>
+<if condition = "$hostlist.is_on_sale eq 1">
+
+	<image src="{wghd::STATICS}/images/yes.gif"></image>
+	<else/>
+	<image src="{wghd::STATICS}/images/no.gif"></image>
+
+</if>
+</td>
+
+
+<td>{wghd:$hostlist.goods_type}</td>
+<td>{wghd:$hostlist.sales_num}</td>
+<td>{wghd:$hostlist.goods_number}</td>
+
+
+<td class="norightborder">
+	<a href="{wghd::U('Ptsys/goodsSet',array('token'=>$token,'goods_id'=>$hostlist['goods_id']))}">修改</a>
+	<a href="javascript:drop_confirm('您确定要删除吗?', '{wghd::U('Ptsys/goodsDel',array('goods_id'=>$hostlist['goods_id'],'token'=>$token))}');">删除</a>
+
+</td>
+
+</tr>
+</volist>
+</tbody>
+</table>
+</form>
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{wghd:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+</div>
+<include file="Public:footer"/>

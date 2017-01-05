@@ -1,0 +1,60 @@
+<script type="text/javascript" src="{wghd::RES}/css/store/js/jquery-1.9.1.min.js"></script>
+<script>
+function onBridgeReady(){
+ WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+	<!-- <div class="clear"></div>
+    <div class="copy" style="text-align:center;">技术支持：微广互动</div> -->
+    <div class="clear"></div>
+    
+    
+    <!--foot开始-->
+    <section class="foot"></section>
+    <div id="foot">
+         <div class="footer">
+              <div class="foot_box">
+                <a href="{wghd::U('Store/index',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id))}">
+                   <div class="icon"><img src="{wghd::RES}/css/store/images/index_15.png" /></div>
+                   <div class="icon_name">首页</div>
+                </a>
+              </div>
+              <div class="foot_box">
+                <a href="{wghd::U('Store/cats',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id))}">
+                   <div class="icon"><img src="{wghd::RES}/css/store/images/index_17.png" /></div>
+                   <div class="icon_name">商品分类</div>
+                </a>
+              </div>
+              <div class="foot_box">
+                <a href="{wghd::U('Store/cart',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id))}">
+                   <div class="icon"><img src="{wghd::RES}/css/store/images/index_19-.png" /></div>
+                   <div class="icon_name">购物车</div>
+                </a>
+              </div>
+              <div class="foot_box">
+                <a href="{wghd::U('Distribution/index',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id))}">
+                   <div class="icon"><img src="{wghd::RES}/css/store/images/index_21.png" /></div>
+                   <div class="icon_name">我的</div>
+                </a>
+              </div>
+         </div>
+    </div>
+    <script>
+        $(function(){
+            var ww=$(window).width()>640?640:$(window).width();
+            var newh=ww/320*55;
+            $(".foot").height(newh);
+        })
+    </script>
+    <!--foot结束-->

@@ -1,0 +1,25 @@
+<include file="Public:head"/>
+<body>
+<div class="container">
+  
+    <div class="categories">
+        <ul>
+            <volist name="pcat" id="cat">
+              <li>
+                  <a href="{wghd::U('Share/index',array('cat_id'=>$cat['cat_id']))}"><img src="{wghd:$cat.cat_img}" alt="{wghd:$cat.cat_name}" /></a>
+                  <not empty name="cat.child">
+                      <div class="subcat">
+                        <volist name="cat.child" id="child">
+                          <p><a href="{wghd::U('Share/index',array('cat_id'=>$child['cat_id']))}">{wghd:$child.cat_name}</a></p>
+                        </volist>
+                      </div>
+                  </not>
+              </li>
+            </volist>
+        </ul>
+    </div>
+
+</div>
+<include file="Public:footer"/>
+</body>
+</html>

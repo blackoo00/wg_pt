@@ -1,0 +1,45 @@
+<footer class="footer">
+    <ul>
+    	<li><a href="{wghd::U('Share/index')}" class="nav-controller <eq name='ACTION_NAME' value='index'>active</eq>"><i class="fa fa-home"></i>首页</a></li>
+        <li><a href="{wghd::U('Share/rank',array('act'=>'is_hot'))}" class="nav-controller <eq name='ACTION_NAME' value='rank'>active</eq>"><i class="fa fa-trophy"></i>热榜</a></li>
+        <li><a href="{wghd::U('Share/cats')}" class="nav-controller <eq name='ACTION_NAME' value='cats'>active</eq>"><i class="fa fa-list"></i>分类</a></li>
+        <li><a href="{wghd::U('Share/user')}" class="nav-controller <eq name='ACTION_NAME' value='user'>active</eq>"><i class="fa fa-user"></i>个人中心</a></li>
+    </ul>
+</footer>
+
+<script>
+	var action_name = "{wghd::ACTION_NAME}";
+	console.log(action_name);
+function onBridgeReady(){
+	if(action_name == 'user' || action_name == 'orderList' || action_name == 'addressList' || action_name == 'teamList'){
+ 		WeixinJSBridge.call('hideOptionMenu');
+	}else{
+ 		WeixinJSBridge.call('showOptionMenu');
+	}
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Share",
+            "moduleID":"{wghd:$res['id']}",
+            "imgUrl": "{wghd:$company['logo']}", 
+            "timeLineLink": "{wghd::C('site_url').U('Share/index')}",
+            "sendFriendLink": "{wghd::C('site_url').U('Share/index')}",
+            "weiboLink": "{wghd::C('site_url').U('Share/index')}",
+            "tTitle": "{wghd:$company.name}",
+            "tContent": "{wghd:$company.brief}"
+        };
+</script>
+{wghd:$shareScript}
+

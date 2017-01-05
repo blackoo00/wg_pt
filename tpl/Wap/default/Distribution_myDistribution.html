@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="target-densitydpi=device-dpi, width=640,user-scalable=0" name="viewport">
+<title>我的分店</title>
+<link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
+<link href="{wghd::RES}/distri/css/wdfd.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div class="container">
+    	
+        <div class="title">
+        	<div class="title_left"><img <eq name="my.headimgurl" value="">src="{wghd::RES}/distri/images/portrait.jpg"<else/>src="{wghd:$my.headimgurl}"</eq> class="img"></div><!--title_left-->
+            <div class="title_right">
+            	<ul class="title_ul">
+                    <li>昵称:<eq name="my.headimgurl" value="">未获取<else/>{wghd:$my.nickname}</eq></li>
+                    <li>关注时间:{wghd:$my.createtime|date='Y-m-d',###}</li>
+                </ul>
+            </div><!--title_right-->
+        </div><!--title-->
+        
+        <div class="clear"></div>
+        <div class="cont">
+        	<div class="cont_left">累计销售：<span class="jg">{wghd::sprintf("%.2f",$totalMoney/100)}元</span></div><!--cont_left-->
+            <div class="cont_right"><a href="{wghd::U('Distribution/followOrder',array('token'=>$token,'wecha_id'=>$wecha_id))}"><span class="tx">销售明细</span></a></div><!--cont_right-->
+        </div><!--cont-->
+        <div class="cont">
+        	<div class="cont_left">累计佣金：<span class="jg">{wghd::sprintf("%.2f",$totalOfferMoney/100)}元</span></div><!--cont_left-->
+            <div class="cont_right1"><a href="#yongjin"><span class="tx1">佣金明细</span></a></div><!--cont_right-->
+        </div><!--cont-->
+        
+        <div class="clear"></div>
+        <eq name="Think.get.notBe" value="1"><div style="color:red;text-align:center;line-height:40px;font-size:1.6em">您目前还未获得分店资格，无法提现</div></eq>
+        <div class="text">
+        	<div class="text_list">
+            	<div class="list_left"><img src="{wghd::RES}/distri/images/jian.png" class="xl"><span class="fx">分销详情</span></div><!--list_left-->
+                <div class="list_right">{wghd::$my['firstNums']+$my['secondNums']+$my['thirdNums']}家</div><!--list_right-->
+            </div><!--text_list-->
+        	<ul class="text_ul">
+            	<li>
+                <a href="{wghd::U('Distribution/memberList',array('token'=>$token,'wecha_id'=>$wecha_id,'type'=>'first'))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">A分店</span></div>
+                    <div class="right"><span class="wz">{wghd:$my.firstNums}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+                <li>
+                <a href="#{wghd::U('Distribution/memberList',array('token'=>$token,'wecha_id'=>$wecha_id,'type'=>'second'))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">B分店</span></div>
+                    <div class="right"><span class="wz">{wghd:$my.secondNums}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+                <li>
+                <a href="{wghd::U('Distribution/memberList',array('token'=>$token,'wecha_id'=>$wecha_id,'type'=>'third'))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">C分店</span></div>
+                    <div class="right"><span class="wz">{wghd:$my.thirdNums}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="text">
+        	<div class="text_list">
+            	<div class="list_left"><img src="{wghd::RES}/distri/images/jian.png" class="xl"><span class="fx">所属分店总下单</span></div><!--list_left-->
+                <div class="list_right">{wghd:$orderNums}次</div><!--list_right-->
+            </div><!--text_list-->
+        	<ul class="text_ul">
+<!--             	<li>
+            	                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">点击链接</span></div>
+            	                    <div class="right"><span class="wz">{wghd:$my.clickNums}次</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+            	                </li> -->
+                <li>
+                <a href="{wghd::U('Distribution/followList',array('token'=>$token,'wecha_id'=>$wecha_id))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">普通A分店</span></div>
+                    <div class="right"><span class="wz">{wghd:$my.followNums}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+				<li>
+                <a href="{wghd::U('Distribution/memberAllList',array('token'=>$token,'wecha_id'=>$wecha_id))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">正式A分店</span></div>
+                    <div class="right"><span class="wz">{wghd:$distriCount}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+                <li>
+                <a href="{wghd::U('Distribution/followOrder',array('token'=>$token,'wecha_id'=>$wecha_id))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">分店总共下单</span></div>
+                    <div class="right"><span class="wz">{wghd:$orderNums}次</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="text" id="yongjin">
+        	<div class="text_list">
+            	<div class="list_left"><img src="{wghd::RES}/distri/images/jian.png" class="xl"><span class="fx">我的佣金</span></div><!--list_left-->
+                <div class="list_right">{wghd::sprintf("%.2f",$totalOfferMoney/100)}元</div><!--list_right-->
+            </div><!--text_list-->
+        	<ul class="text_ul">
+            	<li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">已付款订单佣金</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$order['status_1']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">已收货订单佣金</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$order['status_3']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">可提现佣金总额</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",($order['status_4']-$my['alreadyGetMoney'])/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">已提现佣金总额</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$my['alreadyGetMoney']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">已退款订单佣金</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$order['status_-1']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="text">
+        	<a href="{wghd::U('Distribution/getMoney',array('token'=>$token,'wecha_id'=>$wecha_id))}"><div class="text_list">
+            	<div class="list_left"><span class="fx1">申请提现</span></div><!--list_left-->
+                <div class="list_right1"><span class="wz1">{wghd::sprintf("%.2f",($order['status_4']-$my['alreadyGetMoney'])/100)}元</span><img src="{wghd::RES}/distri/images/next.png" class="next1"></div><!--list_right-->
+            </div><!--text_list-->
+			</a>
+        </div>
+	
+	
+<include file="Public:footer"/>
+    
+    </div><!--container-->
+</body>
+</html>

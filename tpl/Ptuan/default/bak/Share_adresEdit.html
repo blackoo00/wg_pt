@@ -1,0 +1,174 @@
+<include file ="Public:head"/>
+<body>
+        
+        <script type="text/javascript" src="js/utils.js"></script>        <script type="text/javascript">
+          region.isAdmin = false;
+          
+          
+          onload = function() {
+            if (!document.all)
+            {
+              document.forms['theForm'].reset();
+            }
+          }
+          
+        </script>
+        
+       
+        <form action="user.php" method="post" name="theForm" id="theForm" onsubmit="return checkConsignee(this)">
+
+
+ <div class="mod_container">
+        <div class="wx_bar">
+            <div class="wx_bar_back">
+                <a id="back" href="javascript:void(0);"></a>
+            </div>
+            <div class="wx_bar_tit">收货地址</div>
+        </div>
+        <div class="wx_wrap">
+            <div class="address_new">
+                <input id="address_regionId" value="" type="hidden">
+                <input id="adid" value="" type="hidden">
+                <p>
+                    <label for="name"><span class="tit">收货人</span>
+                        <input name="consignee" type="text" class="inputBg" id="consignee_" value="" placeholder="姓名"/>
+                        <span id="updateTip1" style="color: red; display: none;">请填写姓名</span>
+                    </label> 
+                </p>
+                <p>
+                    <label for="mobile"><span class="tit">电话</span>
+                        <input name="mobile" type="text" class="inputBg"  id="mobile_" value="" placeholder="电话"/>
+                        <span id="updateTip2" style="color: red; display: none;">请填写正确的电话</span>
+                    </label>
+                </p>
+                                <p>
+                    <label for="provinceId"><span class="tit">省份</span>
+                        
+         <select name="province" id="selProvinces" onchange="region.changed(this, 2, 'selCities')" style="border:1px solid #ccc;">
+	        <option value="0">请选择</option>
+	        	        <option value="35" >台湾</option>
+	        	        <option value="34" >澳门</option>
+	        	        <option value="33" >香港</option>
+	        	        <option value="32" >重庆</option>
+	        	        <option value="31" >浙江</option>
+	        	        <option value="30" >云南</option>
+	        	        <option value="29" >新疆</option>
+	        	        <option value="28" >西藏</option>
+	        	        <option value="27" >天津</option>
+	        	        <option value="26" >四川</option>
+	        	        <option value="25" >上海</option>
+	        	        <option value="24" >陕西</option>
+	        	        <option value="23" >山西</option>
+	        	        <option value="22" >山东</option>
+	        	        <option value="21" >青海</option>
+	        	        <option value="20" >宁夏</option>
+	        	        <option value="19" >内蒙古</option>
+	        	        <option value="18" >辽宁</option>
+	        	        <option value="17" >江西</option>
+	        	        <option value="16" >江苏</option>
+	        	        <option value="15" >吉林</option>
+	        	        <option value="14" >湖南</option>
+	        	        <option value="13" >湖北</option>
+	        	        <option value="12" >黑龙江</option>
+	        	        <option value="11" >河南</option>
+	        	        <option value="10" >河北</option>
+	        	        <option value="9" >海南</option>
+	        	        <option value="8" >贵州</option>
+	        	        <option value="7" >广西</option>
+	        	        <option value="6" >广东</option>
+	        	        <option value="5" >甘肃</option>
+	        	        <option value="4" >福建</option>
+	        	        <option value="3" >安徽</option>
+	        	        <option value="2" >北京</option>
+	              </select>
+      <span id="updateTip3" style="color: red; display: none;">请选择省</span>
+                    </label>
+                </p>
+                <p>
+                    <label for="cityId"><span class="tit">市</span>
+      <select name="city" id="selCities" onchange="region.changed(this, 3, 'selDistricts')" style="border:1px solid #ccc;">
+        <option value="0">请选择</option>
+              </select>
+       <span id="updateTip4" style="color: red; display: none;">请选择市</span>
+                    </label>
+                </p>
+                
+                <p id="areaSelP" >
+                    <label for="areaId"><span class="tit">区/县</span>   
+        <select name="district" id="selDistricts"  style="border:1px solid #ccc;">
+        <option value="0">请选择</option>
+          
+        </select> 
+         <span id="updateTip5" style="color: red; display: none;">请选择区/县</span></label>
+                </p>
+                
+               <p>
+                    <label for="adinfo"><span class="tit">地址类别</span>
+        <select name="address_type" id="address_type"  style="border:1px solid #ccc;">
+        <option value="0">-选择家庭/公司-</option>
+        <option value="1" >家庭</option>
+        <option value="2" >公司</option>
+        </select> 
+   
+                    </label>
+                </p>
+                <p>
+                    <label for="adinfo"><span class="tit">详细地址</span>
+                        <input name="address" type="text" class="inputBg"  id="address_" value="" placeholder="详细地址" />
+                        <span id="updateTip6" style="color: red; display: none;">请填写详细地址</span>
+                    </label>
+                </p>
+                <p class="action">
+                	<input name="address_id" type="hidden" value="" />
+                	<input type="hidden" name="act" value="act_edit_consignee" />
+                	
+                    <button class="submit" id="add">确认</button>
+                    <button class="submit" type="button" style="background-color: red;display:none" onclick="window.location='user.php?act=drop_consignee&id=';" id="deletes">删除</button>
+                </p>
+            </div>
+        </div>
+    </div>
+  </form>   
+
+</body>
+<script type="text/javascript">
+var process_request = "正在处理您的请求...";
+var username_empty = "- 用户名不能为空。";
+var username_shorter = "- 用户名长度不能少于 3 个字符。";
+var username_invalid = "- 用户名只能是由字母数字以及下划线组成。";
+var password_empty = "- 登录密码不能为空。";
+var password_shorter = "- 登录密码不能少于 6 个字符。";
+var confirm_password_invalid = "- 两次输入密码不一致";
+var email_empty = "- Email 为空";
+var email_invalid = "- Email 不是合法的地址";
+var agreement = "- 您没有接受协议";
+var msn_invalid = "- msn地址不是一个有效的邮件地址";
+var qq_invalid = "- QQ号码不是一个有效的号码";
+var home_phone_invalid = "- 家庭电话不是一个有效号码";
+var office_phone_invalid = "- 办公电话不是一个有效号码";
+var mobile_phone_invalid = "- 手机号码不是一个有效号码";
+var msg_un_blank = "* 用户名不能为空";
+var msg_un_length = "* 用户名最长不得超过7个汉字";
+var msg_un_format = "* 用户名含有非法字符";
+var msg_un_registered = "* 用户名已经存在,请重新输入";
+var msg_can_rg = "* 可以注册";
+var msg_email_blank = "* 邮件地址不能为空";
+var msg_email_registered = "* 邮箱已存在,请重新输入";
+var msg_email_format = "* 邮件地址不合法";
+var msg_blank = "不能为空";
+var no_select_question = "- 您没有完成密码提示问题的操作";
+var passwd_balnk = "- 密码中不能包含空格";
+var country_not_null='国家不能为空';
+var province_not_null='省份不能为空';
+var city_not_null='城市不能为空';
+var district_not_null='区域不能为空';
+var consignee_not_null='收货人不能为空';
+var address_not_null='详细地址不能为空';
+
+var username_exist = "用户名 %s 已经存在";
+var compare_no_goods = "您没有选定任何需要比较的商品或者比较的商品数少于 2 个。";
+var btn_buy = "购买";
+var is_cancel = "取消";
+var select_spe = "请选择商品属性";
+</script>
+</html>

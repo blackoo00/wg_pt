@@ -1,0 +1,341 @@
+<include file="Public:head"/>
+<body id="scnhtm5">
+    <div>
+        <div class="H5_con">
+        
+<!--{if $team_info.team_status eq 1 }-->    
+<eq name="team_info.team_status" value="1">
+<div class="tips topStateWrap tips_succ tips_succ2">
+    <div class="tips_ico"></div>
+    <eq name="is_team" value="1">
+        <div class="tips_tit">快来入团吧</div>
+        <div class="tips_txt">就差你了</div>
+    <else/>
+        <eq name="order.team_first" value="1">
+            <div class="tips_tit">开团成功</div>
+        <else/>
+            <div class="tips_tit">参团成功</div>
+        </eq>
+    
+        <div class="tips_txt">快去邀请好友加入吧</div>
+    </eq>
+</div>
+</eq>
+ 
+<eq name="team_info.team_status" value="2">
+    <gt name="is_teammen" value="0">
+        <div class="tips topStateWrap tips_succ tips_succ2">
+             <div class="tips_ico"></div>
+             <div class="tips_tit">团购成功</div>
+             <div class="tips_txt">我们会尽快为您发货，请耐心等待</div>
+        </div> 
+    <else/>
+        <div class="tips topStateWrap tips_err">
+            <div class="tips_ico"></div>
+            <div class="tips_tit">来晚了一步 此团满员啦</div>
+            <div class="tips_txt">你可以点击底部红色按钮再开一个团 </div>
+        </div>
+    </gt>
+</eq>
+
+<if condition="($team_info.team_status eq 3) OR ($team_info.team_status eq 4)">
+    <gt name="is_teammen" value="0">
+        <div class="tips topStateWrap tips_err">
+            <div class="tips_ico"></div>
+            <div class="tips_tit">团购失败</div>
+            <div class="tips_txt">你可以点击底部红色按钮重新开团</div>
+        </div> 
+    <else/>
+        <div class="tips topStateWrap tips_err">
+            <div class="tips_ico"></div>
+            <div class="tips_tit">来晚了一步！</div>
+        </div>
+    </gt>
+</if>
+        
+        </div>
+        <eq name="team_info.team_status" value="1">
+        <div class="share_box">
+            <a class="share_link" id="share_button" href="javascript:void(0);" onclick="document.getElementById('share_img').style.display='';">直接分享好友参团</a>
+<!--            <a class="share_pic" id="share_button" href="javascript:void(0);" onclick="document.getElementById('share_pic').style.display='';">二维码分享好友参团</a>
+-->        </div>
+        </eq>
+        <div class="H5_con">
+               
+        <div id="group_detail" class="tm <eq name='team_info.team_status' value='2'>tm_succ</eq> <gt name='team_info.team_status' value='2'>tm_err</gt>"><!--团购成功-->
+            
+                <!--  -->
+                <a class="goItemPage" href="{wghd::U('Share/goods',array('goodid'=>$goods['goods_id']))}">
+                    <div class="td tuanDetailWrap">
+                        <div class="td_img"><img src="{wghd:$goods.goods_img}"></div>
+                        <div class="td_info">
+                            <p class="td_name">{wghd:$goods.goods_name}</p>
+                            <p class="td_mprice"> <span class="tuanTotal">{wghd:$team_info['team_num']}</span>人团： <i>¥</i><b>{wghd:$goods.goods_price}</b><i> /件</i></p>
+                            <!-- <p>查看详情</p> -->
+                            <p></p>
+                        </div>
+                    </div>
+                </a>
+                <!--  -->
+            </div>
+            <div class="pp">
+                <div class="pp_users" id="pp_users">
+                    <volist id="list" name="team_mem">
+                        <a class="pp_users_item pp_users_normal" href="#"><img src="{wghd:$list.user.headimgurl}"></a>
+                    </volist>
+
+                    <for start="0" end="$need_num">
+                        <a class="pp_users_item pp_users_blank" href="#"><img src="{wghd::RES}/ptuan/images/avatar_4_64.png"></a>
+                    </for>
+                  
+                </div>
+
+                <eq name="team_info.team_status" value="2">
+                    <div class="pp_tips" id="flag_1_a" >对于诸位大侠的相助，团长感激涕零</div>
+                <else/>
+                    <div class="pp_tips" id="flag_1_a" >优质商品，大家一起玩吧</div>
+                </eq>
+   
+                <eq name="team_info.team_status" value="1">
+                    <div class="pp_tips" id="flag_0_a" >还差<b>{wghd:$need_num}</b>人，盼你如南方人盼暖气~</div>
+                   
+                    <div class="pp_state" id="flag_0_b" >
+                        <div class="pp_time">
+                            剩余<font id="time"></font>结束
+                        </div>
+                    </div>
+                </eq>
+                <eq name="team_info.team_status" value="2">
+                    <div class="pp_state_txt" id="flag_1_b" >团购成功，我们会尽快为您发货，请耐心等待</div>
+                </eq>
+            </div>
+            <div class="pp_list">
+                <div id="showYaoheList">
+                    <volist name="team_mem" id="item">
+                        <eq name="item.team_first" value="1">
+                            <div class="pp_list_item">
+                                <img class="pp_list_avatar" alt="" src="{wghd:$item.user.headimgurl}">
+                                <div class="pp_list_info" id="pp_list_info">
+                                    <span class="pp_list_name">团长<b>{wghd:$item.user.user_name}</b></span>
+                                    <span class="pp_list_time">{wghd:$item.date}开团</span>
+                                </div>
+                            </div>
+                            <else/>
+                            <div class="pp_list_item">
+                                <img class="pp_list_avatar" alt="" src="{wghd:$item.user.headimgurl}">
+                                <div class="pp_list_info" id="pp_list_info">
+                                    <span class="pp_list_name"><b>{wghd:$item.user.user_name}</b></span>
+                                    <span class="pp_list_time">{wghd:$item.date}参团</span>
+                                </div>
+                            </div>
+                        </eq>
+                    </volist>
+                </div>
+                <eq name="team_info.team_status" value="1">
+                    <div id="chamemeber" class="pp_list_blank">
+                        还差
+                        <span>{wghd:$need_num}</span> 人，让小伙伴们都来组团吧！
+                    </div>
+                </eq>
+            </div>
+        </div>
+        <!--div id="shareit">
+            <img class="arrow" src="http://dev.vxtong.com/cases/nuannan/imgs/share-it.png">
+        </div-->
+        <div class="step">
+            <div class="step_hd">
+                拼团玩法<!-- <a class="step_more" href="tuan_rule.php">查看详情</a> -->
+            </div>
+            <div id="footItem" class="step_list">
+                <div class="step_item">
+                    <div class="step_num">1</div>
+                    <div class="step_detail">
+                        <p class="step_tit">选择
+                            <br>心仪商品</p>
+                    </div>
+                </div>
+                <div class="step_item">
+                    <div class="step_num">2</div>
+                    <div class="step_detail">
+                        <p class="step_tit">支付开团
+                            <br>或参团</p>
+                    </div>
+                </div>
+                <div class="step_item <eq name='team_info.team_status' value='1'>step_item_on</eq>">
+                    <div class="step_num">3</div>
+                    <div class="step_detail">
+                        <p class="step_tit">等待好友
+                            <br>参团支付</p>
+                    </div>
+                </div>
+                <div class="step_item <eq name='team_info.team_status' value='2'>step_item_on</eq>" >
+                    <div class="step_num">4</div>
+                    <div class="step_detail">
+                        <p class="step_tit">达到人数
+                            <br>团购成功</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="H5_con fixopt" style="display:block;">
+
+            <gt name="team_info.team_status" value="1">
+                    <div class="fixopt_item">
+                        <a class="fixopt_btn bottomBtn" href="{wghd::U('Share/goods',array('goodid'=>$goods['goods_id']))}">我也开个团，点击回商品列表</a>
+                    </div>
+                <else/>
+                
+                <eq name="is_team" value="1">
+                    <div class="fixopt_item fixopt_item1">
+                        <a class="fixopt_home" href="{wghd::U('Share/index')}" ></a>
+                        <a class="fixopt_share" id="share_button" href="javascript:void(0);" onclick="document.getElementById('share_img').style.display='';"></a>
+                        <input type="hidden" id="team_price" value="{wghd:$team_infp['price']}">
+                        <a class="fixopt_btn" href="javscript:;" onclick="checkBalance({wghd:$team_info.price})">我也要参团</a>
+                    </div>
+                <else/>
+                    <div class="fixopt_item fixopt_item2">
+                        <a class="fixopt_home" href="{wghd::U('Share/index')}" ></a>
+                        <a class="fixopt_btn"  id="share_button" href="javascript:void(0);" onclick="document.getElementById('share_img').style.display='';">还差{wghd:$need_num}人组团成功</a>
+                    </div>
+                </eq>
+            </gt>
+        </div>
+</div>
+
+
+<div id="share_img" class="share_img" style="display: none;" onclick="document.getElementById('share_img').style.display='none';">
+    <p><img class="arrow" src="{wghd::RES}/ptuan/images/share.png" ></p>
+    <p style="margin-top:120px; margin-right:50px;">点击右上角，</p>
+    <p style="margin-right:50px;">将它分享给好友</p>
+    <p style=" text-align:center; font-size:30px; line-height:80px;">参团人数+1</p>
+    <p align="center">还差{wghd::($team_info['team_num'] - $team_info['teammen_num'])}人就能组团成功</p>
+    <p align="center">快邀请小伙伴参团吧</p>
+</div>
+<script>
+    //判断余额
+    function checkBalance(money){
+        $.ajax({
+            url:"{wghd::U('Share/judgeMyMoney')}",
+            data:{money:money},
+            dataType:'json',
+            success:function(data){
+                console.log(data);
+                if(data.status == 1){
+                    confirm =floatNotify.confirm("是否使用余额支付？", "",
+                    function(t, n) {
+                        if(n==true){
+                            location.href="{wghd::U('Share/joinInTeam',array('order_id'=>$team_info['order_id'],'payment'=>2))}";
+                        }else{
+                            location.href="{wghd::U('Share/joinInTeam',array('order_id'=>$team_info['order_id']))}";
+                        }
+                        this.hide();
+                    }),
+                    confirm.show();
+                }else{
+                    location.href="{wghd::U('Share/joinInTeam',array('order_id'=>$team_info['order_id']))}";
+                }
+            }
+        })
+    }
+</script>
+
+<!--<div id="share_pic" style="position:fixed;top:0;right:0;z-index:999;display:none; background:#000;opacity:0.8;filter:alpha(opacity=90);width:100%;height:100%; padding:30px 0; text-align:right;" onclick="document.getElementById('share_pic').style.display='none';"><img src="http://qr.liantu.com/api.php?text=http://127.0.0.1/share.php?team_sign=1146&w=200&m=10"><p style="margin:0 30px; line-height:30px; font-size:16px;"><br/>长按二维码保存，发送给朋友或分享到朋友圈，让你的团尽快成功！</p></div>-->
+</body>
+<script type="text/javascript">
+<!---->
+var daysms = 24 * 60 * 60 * 1000;
+var hoursms = 60 * 60 * 1000;
+var Secondms = 60 * 1000;
+var microsecond = 1000;
+var DifferHour = 0;
+var DifferMinute = 0;
+var DifferSecond = 0;
+    
+var systime={wghd:$systemtime};
+// var team_start={wghd:$team_info.pay_time}*1000;
+var team_end = {wghd:$team_info.end_time}*1000;
+var team_status = {wghd:$team_info.team_status};
+// console.log(systime);
+// console.log(team_end);
+if(team_end/1000 > systime && team_status ==1){
+    setInterval("systime_clock()",1000);
+    window.setInterval("clock()", 1000); 
+}
+function systime_clock(){
+    systime++;
+}
+
+var time = new Date();
+function clock()
+{   
+    //当前时间
+  var time = new Date();
+  // time.setTime(systime*1000);
+
+  var Diffms = team_end - time.getTime();
+  var Diffms1=Diffms;
+  var a='';
+  var b='';
+  var c='';
+  var d='';
+  DifferHour = Math.floor(Diffms / daysms);
+  Diffms -= DifferHour * daysms;
+  DifferMinute = Math.floor(Diffms / hoursms);
+  Diffms -= DifferMinute * hoursms;
+  DifferSecond = Math.floor(Diffms / Secondms);
+  Diffms -= DifferSecond * Secondms;
+  var dShhs = Math.floor(Diffms / microsecond);
+  if(Diffms1>=0){
+       a="还剩<strong class='tcd-h'>"+DifferHour+"</strong>天;";
+       b="<span >"+DifferMinute+"</span>时";
+       c="<span >"+DifferSecond+"</span>分";
+       d="<span>"+dShhs+"</span>秒";
+      document.getElementById('time').innerHTML =a+b+c+d;
+     
+  }else{//已结束
+  /*
+      document.getElementById('handler').innerHTML="<button type='button' onclick='window.location=\'index.php\';'>我也要开个团，点此到商品列表</button>";
+      
+       document.getElementById('flag_0_a').style.display ="none";
+       document.getElementById('flag_0_b').style.display ="none";*/
+      window.location.reload();
+  }
+}
+ 
+<!--  -->
+
+</script>
+<script>
+function onBridgeReady(){
+    WeixinJSBridge.call('showOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}
+</script>
+<script type="text/javascript">
+window.shareData = {  
+            "moduleName":"Share",
+            "moduleID":"{wghd:$res['id']}",
+            "imgUrl": "{wghd:$team_info.goods.goods_img}", 
+            "timeLineLink": "{wghd::C('site_url').U('Share/teamDetail',array('team_sign'=>$team_info['team_sign']))}",
+            "sendFriendLink": "{wghd::C('site_url').U('Share/teamDetail',array('team_sign'=>$team_info['team_sign']))}",
+            "weiboLink": "{wghd::C('site_url').U('Share/teamDetail',array('team_sign'=>$team_info['team_sign']))}",
+            "tTitle": "{wghd:$team_info.goods.goods_name}",
+            "tContent": "{wghd:$team_info.goods.goods_name}"
+        };
+</script>
+{wghd:$shareScript}
+</html>

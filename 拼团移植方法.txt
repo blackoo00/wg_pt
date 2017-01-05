@@ -1,0 +1,16 @@
+WapAction sendMessage方法
+
+BaseAction orderAction，accountLog方法
+
+Conf文件夹下的Ptuan文件夹
+
+Module中Pt开头
+
+前台Action是User中Pt开头的（tpl也一样）
+
+tpl/static/images 中的yes.gif 和no.gif
+
+payHandle中注释case 'share':
+                $this->db = M('Pt_order_info');
+                break;
+wxpay文件下notice_pt.php

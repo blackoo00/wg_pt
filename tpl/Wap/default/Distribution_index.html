@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="target-densitydpi=device-dpi, width=640,user-scalable=0" name="viewport">
+<title>用户中心</title>
+<link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
+<link href="{wghd::RES}/distri/css/grzx.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{wghd::RES}/css/store/js/jquery-1.9.1.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+    	
+        <div class="title">
+        	<div class="title_left"><img <eq name="my.headimgurl" value="">src="{wghd::RES}/distri/images/portrait.jpg"<else/>src="{wghd:$my.headimgurl}"</eq> class="img"></div><!--title_left-->
+            <div class="title_right">
+            	<ul class="title_ul">
+                	<li>分店ID:{wghd::$my['id']+$set['startNums']}</li>
+                    <li>昵称:<eq name="my.headimgurl" value="">未获取<else/>{wghd:$my.nickname}</eq></li>
+                    <li>关注时间:{wghd:$my.createtime|date='Y-m-d',###}</li>
+                    <li>来自好友:<eq name="my.recommended" value="">{wghd:$wxuser.wxname}<else/>{wghd:$my.recommended}</eq></li>
+                    <li>星级店主:否(<a href="{wghd::C('site_url')}/index.php?g=Wap&m=Store&a=index&token=mhfcjx1421158741" style="color:red">购买成为星级店主</a>)</li>
+                </ul>
+            </div><!--title_right-->
+        </div><!--title-->
+        
+        <div class="clear"></div>
+        <div class="cont">
+        	<div class="cont_left">账户余额：<span class="jg">￥{wghd::sprintf("%.2f",($order['status_4']-$my['alreadyGetMoney'])/100)}</span></div><!--cont_left-->
+            <div class="cont_right"><a href="{wghd::U('Distribution/getMoney',array('token'=>$token,'wecha_id'=>$wecha_id))}"><span class="tx">提现</span></a></div><!--cont_right-->
+        </div><!--cont-->
+<!--         <div class="cont">
+        	<div class="cont_left">账户积分：<span class="jg">{wghd::intval($totalScore)}分</span></div>cont_left
+            <div class="cont_right1"><a href="#"><span class="tx1">积分查询</span></a></div>cont_right
+        </div>cont -->
+        <div class="cont cont1">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/dd.png" class="tb"><span class="dd">我的订单</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Store/my',array('token'=>$token,'wecha_id'=>$wecha_id))}">查看全部订单></a></div><!--cont_right-->
+        </div><!--cont-->
+         <div class="cont cont2">
+            	<ul class="list_ul">
+                	<li>
+                    	<div class="fk"><img src="{wghd::RES}/distri/images/dfk.png"></div>
+                        <div class="zi"><a href="{wghd::U('Store/my',array('token'=>$token,'wecha_id'=>$wecha_id,'status'=>0))}">待付款</a></div>
+                    </li>
+                    <li>
+                    	<div class="fk"><img src="{wghd::RES}/distri/images/dfh.png"></div>
+                        <div class="zi"><a href="{wghd::U('Store/my',array('token'=>$token,'wecha_id'=>$wecha_id,'status'=>1))}">待发货</a></div>
+                    </li>
+                    <li>
+                    	<div class="fk"><img src="{wghd::RES}/distri/images/dsh.png"></div>
+                        <div class="zi"><a href="{wghd::U('Store/my',array('token'=>$token,'wecha_id'=>$wecha_id,'status'=>2))}">待收货</a></div>
+                    </li>
+                    <li style="border:0px;">
+                    	<div class="fk"><img src="{wghd::RES}/distri/images/thh.png"></div>
+                        <div class="zi"><a href="{wghd::U('Store/my',array('token'=>$token,'wecha_id'=>$wecha_id,'status'=>4))}">退换货</a></div>
+                    </li>
+                </ul><!--list_ul-->
+        </div><!--cont-->
+		<a href="{wghd::U('Distribution/myDistribution',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id))}">
+        <div class="cont">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/fd.png" class="tb"><span class="dd">我的分店</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Distribution/myDistribution',array('token'=>$_GET['token'],'wecha_id'=>$wecha_id))}">></a></div><!--cont_right-->
+        </div><!--cont-->
+		</a>
+        <a href="{wghd::U('Distribution/collection',array('token'=>$token,'wecha_id'=>$wecha_id))}">
+        <div class="cont cont1">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/sc.png" class="tb"><span class="dd">我的收藏</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Distribution/collection',array('token'=>$token,'wecha_id'=>$wecha_id))}">></a></div><!--cont_right-->
+        </div><!--cont-->
+		</a>
+		<a href="{wghd::U('Distribution/myInfo',array('token'=>$token,'wecha_id'=>$wecha_id))}">
+        <div class="cont">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/zl.png" class="tb"><span class="dd">我的资料</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Distribution/myInfo',array('token'=>$token,'wecha_id'=>$wecha_id))}">></a></div><!--cont_right-->
+        </div><!--cont-->
+		</a>
+        <a href="{wghd::U('Distribution/myScanner',array('token'=>$token,'mid'=>$my['id']))}">
+        <div class="cont cont1">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/ewm.png" class="tb"><span class="dd">我的推广二维码</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Distribution/myScanner',array('token'=>$token,'mid'=>$my['id']))}">></a></div><!--cont_right-->
+        </div><!--cont-->
+		</a>
+		<eq name="update" value="1">
+		<a href="{wghd::U('Distribution/updateMyInfo',array('token'=>$token,'wecha_id'=>$wecha_id))}" onclick="return confirm('每天只能更新一次，您确定要更新吗？');">
+        <div class="cont">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/gxtx.png" class="tb"><span class="dd">更新头像昵称</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="{wghd::U('Distribution/updateMyInfo',array('token'=>$token,'wecha_id'=>$wecha_id))}" onclick="return confirm('每天只能更新一次，您确定要更新吗？');">></a></div><!--cont_right-->
+        </div><!--cont-->
+	    </a>
+		<else/>
+		<a href="javascript:;" onclick="alert('您今天已经更新过了');">
+        <div class="cont">
+        	<div class="cont_left1"><img src="{wghd::RES}/distri/images/gxtx.png" class="tb"><span class="dd">更新头像昵称</span></div><!--cont_left-->
+            <div class="cont_right2"><a href="javascript:;" onclick="alert('您今天已经更新过了');">></a></div><!--cont_right-->
+        </div><!--cont-->
+	    </a>
+		</eq>
+	
+        <style>
+        #foot .footer .foot_box .icon_name{
+            height: 40px;
+            line-height: 40px;
+            font-size: 24px;
+        }
+        </style>
+    <script>
+        // $(function(){
+        //     var ww=$(window).width();
+        //     var newh=320/ww*40;
+        //     var fs=320/ww*24;
+        //     $("#foot .footer .foot_box .icon_name").height(newh).css({"line-height":newh+"px","font-size":fs+"px"});
+        // })
+    </script>
+<div class="clear"></div>
+    <div class="copy" style="text-align:center;">技术支持：微广互动</div>
+<include file="Public:footer"/>
+    
+    </div><!--container-->
+</body>
+</html>

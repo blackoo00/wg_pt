@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>分店详情</title>
+<link href="{wghd::RES}/distri/css/head.css" rel="stylesheet" type="text/css" />
+<link href="{wghd::RES}/distri/css/wdfd.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<meta content="target-densitydpi=device-dpi, width=640,user-scalable=0" name="viewport">
+	<div class="container">
+    	
+        <div class="title title1">
+        	<div class="title_left"><img <eq name="my.headimgurl" value="">src="{wghd::RES}/distri/images/portrait.jpg"<else/>src="{wghd:$member.headimgurl}"</eq> class="img"></div><!--title_left-->
+            <div class="title_right">
+            	<ul class="title_ul">
+                    <li>昵称:<eq name="my.headimgurl" value="">未获取<else/>{wghd:$member.nickname}</eq></li>
+                    <li>关注时间:{wghd:$member.createtime|date='Y-m-d',###}</li>
+                </ul>
+            </div><!--title_right-->
+        </div><!--title-->
+        
+        <div class="clear"></div>
+        <div class="text1">累计销售：<span style="color:#ff6501;">{wghd::sprintf("%.2f",$member['totalMoney']/100)}元</span></div>
+        <div class="text1" style="border-left:0px;">贡献佣金：<span style="color:#ff6501;">{wghd::sprintf("%.2f",$offerMoney/100)}元</span></div>
+        
+        <div class="clear"></div>
+        
+        <div class="text">
+        	<div class="text_list">
+            	<div class="list_left"><img src="{wghd::RES}/distri/images/jian.png" class="xl"><span class="fx">他的A分店</span></div><!--list_left-->
+                <div class="list_right">{wghd:$member.firstNums}家</div><!--list_right-->
+            </div><!--text_list-->
+        	<ul class="text_ul">
+            	<li>
+                <a href="{wghd::U('Distribution/agentList',array('token'=>$token,'wecha_id'=>$wecha_id,'mid'=>$member['id'],'type'=>'first'))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">分店数</span></div>
+                    <div class="right"><span class="wz">{wghd:$member.firstNums}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">消费金额</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$member['first_member_totalMoney']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">贡献佣金</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$member['first_member_offerMoney']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </a>
+            </ul>
+        </div>
+        
+        <div class="text">
+        	<div class="text_list">
+            	<div class="list_left"><img src="{wghd::RES}/distri/images/jian.png" class="xl"><span class="fx">他的B分店</span></div><!--list_left-->
+                <div class="list_right">{wghd:$member.secondNums}家</div><!--list_right-->
+            </div><!--text_list-->
+        	<ul class="text_ul">
+            	<li>
+                <a href="{wghd::U('Distribution/agentList',array('token'=>$token,'wecha_id'=>$wecha_id,'mid'=>$member['id'],'type'=>'second'))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">分店数</span></div>
+                    <div class="right"><span class="wz">{wghd:$member.secondNums}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">消费金额</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$member['second_member_totalMoney']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">贡献佣金</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$member['second_member_offerMoney']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="text">
+        	<div class="text_list">
+            	<div class="list_left"><img src="{wghd::RES}/distri/images/jian.png" class="xl"><span class="fx">他的C分店</span></div><!--list_left-->
+                <div class="list_right">{wghd:$member.thirdNums}家</div><!--list_right-->
+            </div><!--text_list-->
+        	<ul class="text_ul">
+            	<li>
+                <a href="{wghd::U('Distribution/agentList',array('token'=>$token,'wecha_id'=>$wecha_id,'mid'=>$member['id'],'type'=>'third'))}">
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">分店数</span></div>
+                    <div class="right"><span class="wz">{wghd:$member.thirdNums}家</span><img src="{wghd::RES}/distri/images/next.png" class="next"></div>
+                </a>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">消费金额</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$member['third_member_totalMoney']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+                <li>
+                	<div class="left"><img src="{wghd::RES}/distri/images/jiant.png" class="jian"><span class="fd">贡献佣金</span></div>
+                    <div class="right"><span class="wz">{wghd::sprintf("%.2f",$member['third_member_offerMoney']/100)}元</span><img src="{wghd::RES}/distri/images/xin.png" class="next"></div>
+                </li>
+            </ul>
+        </div>
+
+<include file="Public:footer"/>
+    
+    </div><!--container-->
+</body>
+</html>

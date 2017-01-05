@@ -1,0 +1,14 @@
+[ 2016-11-23T11:31:00+08:00 ] ERR: (ThinkException) _TEMPLATE_NOT_EXIST_[./tpl/Ptuan/Share/index.html]
+[ 2016-11-23T15:13:26+08:00 ] ERR: (ThinkException) _MODULE_NOT_EXIST_:Share
+[ 2016-11-23T15:14:41+08:00 ] ERR: (ThinkException) La table 'wg_pt.pigcms_pt_categroy' n'existe pas
+ [ SQL语句 ] : SHOW COLUMNS FROM `pigcms_pt_categroy`
+[ 2016-11-23T15:29:27+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [yZ2VTa0320ge14]openid=
+[ 2016-11-23T15:38:34+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [qyxw3a0867ge10]openid=
+[ 2016-11-23T15:41:22+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [44H7IA0034ge17]openid=
+[ 2016-11-23T15:42:11+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [C70Ppa0083ge12]openid=
+[ 2016-11-23T15:42:19+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:users
+[ 2016-11-23T15:45:10+08:00 ] ERR: (ThinkException) _ERROR_ACTION_:users
+[ 2016-11-23T15:45:30+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [LcunPA0283zbg7]openid=
+[ 2016-11-23T15:45:30+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [wIf3nA0283age3]openid=
+[ 2016-11-23T15:45:30+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [W7AI8a0283zbg7]openid=
+[ 2016-11-23T15:49:03+08:00 ] ERR: 发生错误：错误代码40003,微信返回错误信息：invalid openid hint: [Th3ZMa0495ge12]openid=

@@ -1,0 +1,54 @@
+<include file="Public:head" /> 
+<script src="{wghd::STATICS}/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="{wghd::STATICS}/artDialog/plugins/iframeTools.js"></script>
+  <div class="content"> 
+   <div class="cLineB"> 
+    <h4>会员设置</h4> 
+    <a href="{wghd::U('Member/setMember',array('token'=>$token))}" class="right  btnGreen" style="margin-top:-27px">返回</a> 
+   </div> 
+   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    <input type="hidden" name="id" value="{wghd:$set.id}" /> 
+     
+    <div class="msgWrap bgfc"> 
+     <table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%"> 
+      <tbody> 
+    
+
+    <tr> 
+        <th><span class="red">*</span>名称：</th> 
+        <span></span>
+    </tr> 
+
+    <tr> 
+        <th><span class="red">*</span>邮件地址：</th> 
+        <td><input type="text" name="name" value="{wghd:$set.name}" class="px" style="width:100px;" /></td> 
+    </tr> 
+	  
+
+	  <tr> 
+        <th><span class="red">*</span>新密码：</th> 
+        <td><input type="text" id="sort" name="sort" value="{wghd:$set.sort}" class="px" style="width:80px;" /></td> 
+    </tr>
+
+    <tr> 
+        <th><span class="red">*</span>确认密码：</th> 
+        <td><input type="text" id="sort" name="sort" value="{wghd:$set.sort}" class="px" style="width:80px;" />  </td> 
+    </tr>    
+
+    <tr> 
+        <th><span class="red">*</span>手机：</th> 
+        <td><input type="text" id="sort" name="sort" value="{wghd:$set.sort}" class="px" style="width:80px;" />  </td> 
+    </tr>    
+
+
+       <tr>         
+       <th>&nbsp;</th>
+       <td>
+       <button type="submit" name="button" class="btnGreen">保存</button> &nbsp; <a href="{wghd::U('Member/setMember',array('token'=>$token))}" class="btnGray vm">取消</a></td> 
+       </tr> 
+      </tbody> 
+     </table> 
+     </div>
+   </form> 
+  </div> 
+  <include file="Public:footer" />

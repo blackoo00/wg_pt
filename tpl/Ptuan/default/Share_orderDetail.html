@@ -1,0 +1,160 @@
+<include file="Public:head"/>
+<body id="scnhtm5">
+<div class="container">
+    <div class="mod_container"   id="dealliststatus1">
+        <div id="detailCon" class="wx_wrap">
+            <div class="
+            <eq name='order.shipping_status' value='2'>state state_3</eq>
+            <eq name='order.shipping_status' value='1'>state state_2</eq>
+            <eq name='order.paid' value='1'>state state_1</eq>">
+                <div class="state_step">
+                    <ul>
+                        <li class="state_step_1"></li>
+                        <li class="state_step_2"></li>
+                        <li class="state_step_3"></li>
+                    </ul>
+                <span class="state_arrow">
+                <i class="state_arrow_i"></i>
+                <i class="state_arrow_o"></i>
+                </span>
+                </div>
+                <div class="address">
+                    <div class="address_row">
+                        <div class="address_tit">订单状态：</div>
+                        <div class="address_cnt">
+                            <b>
+                                <switch name="order.order_status">
+                                    <case value="0">未付款</case>
+                                    <case value="1">已付款</case>
+                                    <case value="2">已发货</case>
+                                    <case value="3">已收货</case>
+                                    <case value="4">申请退款</case>
+                                    <case value="5">退款完成</case>
+                                </switch>
+                            </b>
+                        </div>
+                    </div>
+                    <!-- 
+                    <div class="address_row">
+                        <div class="address_tit">支付状态：</div>
+                        <div class="address_cnt">
+                            <b>{wghd:$order.pay_status}</b>
+                        </div>
+                    </div>
+                    <div class="address_row">
+                        <div class="address_tit">配送状态：</div>
+                        <div class="address_cnt">
+                            <b>{wghd:$order.shipping_status}</b>
+                        </div>
+                    </div> -->
+                    <div class="address_row">
+                        <div class="address_tit">总 额：</div>
+                        <div class="address_cnt">
+                            <span class="address_price">{wghd:$order.price}</span>
+                            <span class="address_paytype">（{wghd:$order.pay_name}）</span>
+                        </div>
+                    </div>
+                    <div class="address_row">
+                        <div class="address_tit">送 至：</div>
+                        <div class="address_cnt">{wghd:$order.address}</div>
+                    </div>
+                    <div class="address_row">
+                        <div class="address_tit">收 货 人：</div>
+                        <div class="address_cnt">{wghd:$order.consignee} {wghd:$order.mobile}</div>
+                    </div>
+                    <div class="address_row">
+                        <div class="address_tit">订单编号：</div>
+                        <div class="address_cnt">{wghd:$order.orderid}</div>
+                    </div>
+                    <div class="address_row">
+                        <div class="address_tit">下单时间：</div>
+                        <div class="address_cnt">{wghd:$order.add_time|date="Y-m-d H:i:s",###}</div>
+                    </div>
+                    <!-- <div class="address_row">
+                        <div class="address_tit">配送方式：</div>
+                        <div class="address_cnt">{wghd:$order.shipping_name}<br>{wghd:$order.invoice_no}</div>
+                    </div> -->
+                </div>
+               <!--{if 1} -->
+                <div class="state_btn">
+                {wghd:$order.handler} 
+                </div>
+                <div class="state_btn"> </div>
+                <!-- {/if} -->
+            </div>
+            <div class="ptit">商品信息
+            </div>
+            <div class="order order_height">
+                <div class="order_bd">
+                    <div class="order_glist">
+                        <div class="order_item">
+                            <!-- {foreach from=$goods_list item=goods} -->
+                            <a href="goods.php?id={$goods.goods_id}" class="order_goods" style="float:left;border-bottom:none;">
+                                <div class="order_goods_img">
+                                    <img src="{wghd:$order.goods.goods_img}">
+                                </div>
+                            </a>
+                            <div class="order_goods_info">
+                                <a class="order_goods" href="{wghd::U('Share/goods',array('goodid'=>$order['goods']['goods_id']))}">
+                                    <div class="order_goods_name">{wghd:$order.goods.goods_name}</div>
+                                    <div class="order_goods_attr">
+                                        <div class="order_goods_attr_item">数量：{wghd:$order.goods.goods_number}
+                                            <div class="order_goods_price"><i>¥</i>{wghd:$order.goods.goods_price}<i>/件</i></div>
+                                        </div>
+                                        <p class="order_goods_attr_item">{wghd:$order.goods.goods_attr|nl2br}</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- {/foreach} -->
+                        </div>
+                    </div>
+                    <div>
+                        <eq name="order.shipping_status" value="1">
+                            <a class ="mt_status_lk1 marg_right" href="{wghd::U('Share/orderReceive',array('order_id'=>$order['order_id']))}">确认收货</a>
+                        </eq>
+                    <neq name="order.team_sign" value="0">
+                        <a class ="mt_status_lk1 marg_right" href="{wghd::U('Share/teamDetail',array('team_sign'=>$order['team_sign']))}">查看团详情</a>
+                        <else/>
+                        <if condition="($order['shipping_status'] neq 1) AND ($order['refund_sign'] eq 0) AND ($order['paid'] eq 1) ">
+                            <a class ="mt_status_lk1 marg_right" onclick="applyRefund({wghd:$order['order_id']})">申请退款</a>
+                        </if>
+                    </neq>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            
+                
+        </div>
+    </div>
+  
+  <div class="express_box" id="invoice" style="display:none;">
+        <!-- 
+        <h3>物流跟踪</h3>
+        <ul>
+         <div id="retData"></div> 
+         </ul>-->
+     </div>
+
+
+
+
+        
+</div>
+<include file="Public:footer"/>
+</body>
+<script type="text/javascript">
+    function applyRefund(order_id){
+        confirm =floatNotify.confirm("确认申请退款吗？", "",
+            function(t, n) {
+                if(n==true){
+                    location.href="<?php echo U('Share/applyRefund',array('order_id'=>'"+order_id+"'));?>";
+                }
+                this.hide();
+            }),
+            confirm.show();
+    }
+</script>
+  
+</html>
